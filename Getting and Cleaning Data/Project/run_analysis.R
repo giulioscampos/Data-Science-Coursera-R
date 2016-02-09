@@ -61,8 +61,8 @@ names(Data) <- names(Data) %>% str_replace_all("\\(\\)", "") %>%
 
 
 # 5) From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-final.melted <- melt(Data, id = c("subject", "activity"))
-final.mean <- dcast(final.melted, subject + activity ~ variable, mean) 
-final.mean.ordered <- final.mean %>% arrange(subject, activity)
+final.melted <- melt(Data, id = c("subject", "activity", "activityLabel"))
+final.mean <- dcast(final.melted, subject + activity + activityLabel ~ variable, mean) 
+final.mean.ordered <- final.mean %>% arrange(subject, activity, activityLabel)
 View(final.mean.ordered)
 write.table(final.mean.ordered, "tidy.txt", row.names = FALSE, quote = FALSE)

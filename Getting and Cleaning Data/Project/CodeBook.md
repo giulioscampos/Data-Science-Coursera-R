@@ -1,77 +1,78 @@
 #CodeBook for dataset tidy.txt
 
-| Variable Name | Position      | Explanation  |
-| :------------ |:-------------| :------------|
-| subject       |             1 ||
-| activity      |             2 |1=WALKING|
+| Variable Name | Position      | Explanation |
+| :------------ |:-------------| :-------------|
+| subject | 1 ||
+| activity | 2 ||
+| activityLabel      |             3 |1=WALKING|
 |||2=WALKING_UPSTAIRS|
 |||3=WALKING_DOWNSTAIRS|
 |||4=SITTING|
 |||5=STANDING|
 |||6=LAYING|
-| tBodyAccMeanX |3||
-| tBodyAccMeanY |4||
-| tBodyAccMeanZ |5||
-| tBodyAccStdX |6||
-| tBodyAccStdY |7||
-| tBodyAccStdZ |8||
-| tGravityAccMeanX |9||
-| tGravityAccMeanY |10||
-| tGravityAccMeanZ |11||
-| tGravityAccStdX |12||
-| tGravityAccStdY |13||
-| tGravityAccStdZ |14||
-| tBodyAccJerkMeanX |15||
-| tBodyAccJerkMeanY |16||
-| tBodyAccJerkMeanZ |17||
-| tBodyAccJerkStdX |18||
-| tBodyAccJerkStdY |19||
-| tBodyAccJerkStdZ |20||
-| tBodyGyroMeanX |21||
-| tBodyGyroMeanY |22||
-| tBodyGyroMeanZ |23||
-| tBodyGyroStdX |24||
-| tBodyGyroStdY |25||
-| tBodyGyroStdZ |26||
-| tBodyGyroJerkMeanX |27||
-| tBodyGyroJerkMeanY |28||
-| tBodyGyroJerkMeanZ |29||
-| tBodyGyroJerkStdX |30||
-| tBodyGyroJerkStdY |31||
-| tBodyGyroJerkStdZ |32||
-| tBodyAccMagMean |33||
-| tBodyAccMagStd |34||
-| tGravityAccMagMean |35||
-| tGravityAccMagStd |36||
-| tBodyAccJerkMagMean |37||
-| tBodyAccJerkMagStd |38||
-| tBodyGyroMagMean |39||
-| tBodyGyroMagStd |40||
-| tBodyGyroJerkMagMean |41||
-| tBodyGyroJerkMagStd |42||
-| fBodyAccMeanX |43||
-| fBodyAccMeanY |44||
-| fBodyAccMeanZ |45||
-| fBodyAccStdX |46||
-| fBodyAccStdY |47||
-| fBodyAccStdZ |48||
-| fBodyAccJerkMeanX |49||
-| fBodyAccJerkMeanY |50||
-| fBodyAccJerkMeanZ |51||
-| fBodyAccJerkStdX |52||
-| fBodyAccJerkStdY |53||
-| fBodyAccJerkStdZ |54||
-| fBodyGyroMeanX |55||
-| fBodyGyroMeanY |56||
-| fBodyGyroMeanZ |57||
-| fBodyGyroStdX |58||
-| fBodyGyroStdY |59||
-| fBodyGyroStdZ |60||
-| fBodyAccMagMean |61||
-| fBodyAccMagStd |62||
-| fBodyBodyAccJerkMagMean |63||
-| fBodyBodyAccJerkMagStd |64||
-| fBodyBodyGyroMagMean |65||
-| fBodyBodyGyroMagStd |66||
-| fBodyBodyGyroJerkMagMean |67||
-| fBodyBodyGyroJerkMagStd|68||
+| timeBodyAccelerometerMeanX | 4 ||
+| timeBodyAccelerometerMeanY | 5 ||
+| timeBodyAccelerometerMeanZ |6  ||
+| timeBodyAccelerometerStdX | 7 ||
+| timeBodyAccelerometerStdY | 8 ||
+| timeBodyAccelerometerStdZ | 9 || 
+| timeGravityAccelerometerMeanX | 10 ||
+| timeGravityAccelerometerMeanY | 11 ||
+| timeGravityAccelerometerMeanZ |12  ||
+| timeGravityAccelerometerStdX | 13 ||
+| timeGravityAccelerometerStdY | 14 ||
+| timeGravityAccelerometerStdZ | 15 || 
+| timeBodyAccelerometerJerkMeanX | 16 ||
+| timeBodyAccelerometerJerkMeanY | 17 ||
+| timeBodyAccelerometerJerkMeanZ |18  ||
+| timeBodyAccelerometerJerkStdX | 19 ||
+| timeBodyAccelerometerJerkStdY | 20 ||
+| timeBodyAccelerometerJerk StdZ | 21 ||
+| timeBodyGyroscopeMeanX | 22 ||
+| timeBodyGyroscopeMeanY | 23 ||
+| timeBodyGyroscopeMeanZ |24  ||
+| timeBodyGyroscopeStdX | 25 ||
+| timeBodyGyroscopeStdY | 26 ||
+| timeBodyGyroscopeStdZ | 27 ||
+| timeBodyGyroscopeJerkMeanX | 28 ||
+| timeBodyGyroscopeJerkMeanY | 29 ||
+| timeBodyGyroscopeJerkMeanZ |30  ||
+| timeBodyGyroscopeJerkStdX | 31 ||
+| timeBodyGyroscopeJerkStdY | 32 ||
+| timeBodyGyroscopeJerkStdZ | 33 || 
+| timeBodyAccelerometerMagnitudeMean |34  ||
+| timeBodyAccelerometerMagnitudeStd | 35 || 
+| timeGravityAccelerometerMagnitudeMean |36  ||
+| timeGravityAccelerometerMagnitudeStd | 37 || 
+| timeBodyAccelerometerJerkMagnitudeMean |38  ||
+| timeBodyAccelerometerJerkMagnitudeStd | 39 ||
+| timeBodyGyroscopeMagnitudeMean |40  ||
+| timeBodyGyroscopeMagnitudeStd | 41|| 
+| timeBodyGyroscopeJerkMagnitudeMean |42  ||
+| timeBodyGyroscopeJerkMagnitudeStd  |43 ||
+| frequencyBodyAccelerometerMeanX | 44 ||
+| frequencyBodyAccelerometerMeanY | 45 ||
+| frequencyBodyAccelerometerMeanZ |46  ||
+| frequencyBodyAccelerometerStdX | 47 ||
+| frequencyBodyAccelerometerStdY | 48 ||
+| frequencyBodyAccelerometerStdZ | 49|| 
+| frequencyBodyAccelerometerJerkMeanX | 50 ||
+| frequencyBodyAccelerometerJerkMeanY | 51 ||
+| frequencyBodyAccelerometerJerkMeanZ |52  ||
+| frequencyBodyAccelerometerJerkStdX | 53 ||
+| frequencyBodyAccelerometerJerkStdY | 54 ||
+| frequencyBodyAccelerometerJerkStdZ | 55||
+| frequencyBodyGyroscopeMeanX | 56 ||
+| frequencyBodyGyroscopeMeanY | 57 ||
+| frequencyBodyGyroscopeMeanZ |58  ||
+| frequencyBodyGyroscopeStdX | 59 ||
+| frequencyBodyGyroscopeStdY | 60 ||
+| frequencyBodyGyroscopeStdZ | 61|| 
+| frequencyBodyAccelerometerMagnitudeMean |62  ||
+| frequencyBodyAccelerometerMagnitudeStd | 63|| 
+| frequencyBodyAccelerometerJerkMagnitudeMean |64  ||
+| frequencyBodyAccelerometerJerkMagnitudeStd |65 ||
+| frequencyBodyGyroscopeMagnitudeMean |66  ||
+| frequencyBodyGyroscopeMagnitudeStd | 67|| 
+| frequencyBodyGyroscopeJerkMagnitudeMean |68  ||
+| frequencyBodyGyroscopeJerkMagnitudeStd | 69||
