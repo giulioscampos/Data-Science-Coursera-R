@@ -1,0 +1,136 @@
+---
+title: "Prediction Assignment"
+author: "John Econ"
+date: "May 20, 2016"
+output: html_document
+---
+
+# 1 Intro
+## 1.1 Background
+
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways:
+
+* exactly according to the specification (Class A)
+* throwing the elbows to the front (Class B)
+* lifting the dumbbell only halfway (Class C)
+* lowering the dumbbell only halfway (Class D)
+* throwing the hips to the front (Class E)
+
+More information is available from the website here: <http://groupware.les.inf.puc-rio.br/har> (see the section on the Weight Lifting Exercise Dataset).
+
+## 1.2 Data
+
+The training data for this project are available here:
+<https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv>.
+
+The test data are available here:
+<https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv>.
+
+# 2 Analysis
+## 2.1 Packages required for this analysis
+
+```{r}
+library(caret);library(randomForest)
+```
+
+
+## 2.2 Reading the data
+
+After downloading the training and testing datasets into a folder named data under the current working directory, we read them, treating blanks, division by zeros and NAs as NAs.
+
+```{r reading_data}
+setwd("C:/Users/johnecon/Projects/datasciencecoursera/Practical Machine Learning/assignment/")
+pml_data <- read.csv("./data/pml-training.csv", na.strings=c("", "NA","#DIV/0!"))
+```
+
+## 2.3 Partitioning training and testing sets
+
+Since the pml-testing.csv has only 20 records, we split the pml-training.csv into the training and the testing datasets on the varriable of interest (classe). We will later use the pml-testing.csv as a validation dataset.
+
+```{r partitions}
+set.seed(34233)
+inTrain <- createDataPartition(y=pml_data$classe, list=FALSE, p=0.7)
+training <- pml_data[inTrain,]
+testing <- pml_data[-inTrain,]
+validation <- read.csv("./data/pml-testing.csv")
+```
+
+```{r}
+dim(training)
+```
+
+```{r}
+dim(testing)
+```
+
+```{r}
+dim(validation)
+```
+
+## 2.4 Cleaning up variables from the training set that are mostly NAs
+
+By reviewing the training data we can identify varriables that are mostly NAs.
+To clean them up we take 70% as a thresshold, meaning if a variable appears more than 70% NA then it needs to be removed.
+
+```{r cleaning_nas}
+training <- training[,colSums(is.na(training))/nrow(training)<0.7]
+```
+
+## 2.5 Cleaning up time and user related variables (columns 1 to 7)
+
+Predicting how well one performs an activity has nothing to do with the time or the name of the person. Thus the first seven columns have to be removed.
+
+```{r cleaning_user_and_time_related_vars}
+training <- training[,-c(1:7)]
+```
+
+```{r}
+dim(training)
+```
+
+## 2.6 Building a Random Forest
+Because of the characteristic noise in the sensor data, the recommended approach for the model method is the Random Forest. This algorithm is characterized by a subset of features, selected in a random and independent manner with the same distribution for each of the trees in the forest.
+
+```{r building_a_random_forest}
+set.seed(34233)
+mod_fit_rf <- train(classe ~ ., data = training, method = "rf", ntree=10)
+predRF <- predict(mod_fit_rf, testing)
+confusionMatrix(predRF, testing$classe)
+# Accuracy
+confusionMatrix(predRF, testing$classe)$overall[1]
+
+```
+
+## 2.7 Improving the model
+Increasing the number of trees to 20 we expect to improve the accuracy of the model but that is not actually the case since it leads to overfitting.
+```{r increasing_ntree_20}
+set.seed(34233)
+mod_fit_rf_20 <- train(classe ~ ., data = training, method = "rf", ntree=20)
+pred_rf_20 <- predict(mod_fit_rf_20, testing)
+confusionMatrix(pred_rf_20, testing$classe)
+```
+
+```{r plort_error_vs_ntrees}
+plot(mod_fit_rf_20$finalModel, main="Classification Tree")
+```
+
+Droping downping down to 15 trees seems gives us the final model.
+```{r decreasing_ntree_15}
+set.seed(34233)
+mod_fit_rf_15 <- train(classe ~ ., data = training, method = "rf", ntree=15)
+pred_rf_15 <- predict(mod_fit_rf_15, testing)
+confusionMatrix(pred_rf_15, testing$classe)
+```
+
+# 3 Conclusions and Final Predictions
+## 3.1 Conclusions
+A Random Forest model with 15 trees provided accuracy 99% and thus we expect that very few of the test samples will be missclassified.
+
+## 3.2 Predictions on the official test dataset
+```{r predictions_on_validation}
+set.seed(34233)
+predict(mod_fit_rf_15, validation)
+```
+
+# 4 Credits
+The data for this project come from this source: <http://groupware.les.inf.puc-rio.br/har>.
