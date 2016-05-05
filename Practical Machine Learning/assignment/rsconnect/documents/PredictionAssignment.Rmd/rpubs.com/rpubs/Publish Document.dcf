@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+bundleId:
+        https://api.rpubs.com/api/v1/document/178739/857ecca8f12f4a49ac5f6ec68e1ac406
+url: http://rpubs.com/johnecon/178739
+when: 1462491695.87003

@@ -102,7 +102,7 @@ confusionMatrix(predRF, testing$classe)$overall[1]
 ```
 
 ## 2.7 Improving the model
-Increasing the number of trees to 20 we expect to improve the accuracy of the model but that is not actually the case since it leads to overfitting.
+Increasing the number of trees to 20 we expect to improve the accuracy of the model but that is not actually the case since it leads to overfitting. So we reach the point where the in sample errors is decreasing while the out sample error is increasing.
 ```{r increasing_ntree_20}
 set.seed(34233)
 mod_fit_rf_20 <- train(classe ~ ., data = training, method = "rf", ntree=20)
@@ -114,7 +114,7 @@ confusionMatrix(pred_rf_20, testing$classe)
 plot(mod_fit_rf_20$finalModel, main="Classification Tree")
 ```
 
-Droping downping down to 15 trees seems gives us the final model.
+Dropping the number of trees down to 15 we get the final model.
 ```{r decreasing_ntree_15}
 set.seed(34233)
 mod_fit_rf_15 <- train(classe ~ ., data = training, method = "rf", ntree=15)
@@ -122,9 +122,18 @@ pred_rf_15 <- predict(mod_fit_rf_15, testing)
 confusionMatrix(pred_rf_15, testing$classe)
 ```
 
+The 10-folded cross validation confirms the results of our model.
+```{r cross_validation}
+tr <- trainControl(method = "cv",number = 10)
+set.seed(34233)
+mod_fit_rf_cv <- train(classe ~ ., data = training, method = "rf", ntree=15, tr=tr)
+pred_rf_cv <- predict(mod_fit_rf_cv, testing)
+confusionMatrix(pred_rf_cv, testing$classe)
+```
+
 # 3 Conclusions and Final Predictions
 ## 3.1 Conclusions
-A Random Forest model with 15 trees provided accuracy 99% and thus we expect that very few of the test samples will be missclassified.
+A Random Forest model with 15 trees provided accuracy 99% and thus we expect that at most one of the test samples will be missclassified.
 
 ## 3.2 Predictions on the official test dataset
 ```{r predictions_on_validation}
