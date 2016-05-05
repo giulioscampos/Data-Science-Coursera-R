@@ -2,7 +2,7 @@
 title: "Prediction Assignment"
 author: "John Econ"
 date: "May 20, 2016"
-output: html_document
+output: pdf_document
 ---
 
 # 1 Intro
